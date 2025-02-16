@@ -17,4 +17,4 @@ docker compose -f compose.yml -f compose.override.yml --env-file .env up -d --bu
 - flake8 в качестве линтера - его конфигурация [Linter Config(flake8).md](Linter%20Config%28flake8%29.md)
 - 
 ## Графики нагрузочного тестирования
-![img.png](img.png)
+![image.png](image.png)
