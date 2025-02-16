@@ -20,7 +20,7 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
       - PROJECT_NAME=${PROJECT_NAME}
     networks:
-      - bet-network
+      - shop-network
 
   db:
     image: postgres:13
@@ -34,16 +34,31 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - bet-network
+      - shop-network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 5
+  
+  locust:
+    image: locustio/locust
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./locustfile.py:/locust/locustfile.py
+    environment:
+      - LOCUST_HOST=http://avito-shop-service:8800
+    depends_on:
+      - avito-shop-service
+    networks:
+      - shop-network
+    command: -f /locust/locustfile.py --host ${LOCUST_HOST:-http://avito-shop-service:8800}
+
 
 volumes:
   postgres_data:
 
 networks:
-  bet-network:
+  shop-network:
     driver: bridge

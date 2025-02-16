@@ -14,14 +14,8 @@ from exceptions.app_exception import InvalidCredentialsError, UserNotFoundError
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     async with async_session() as session:
-        try:
-            yield session
-        except Exception as e:
-            await session.rollback()
-            raise
-        finally:
-            await session.close()
-
+        yield session
+        
 def get_uow(
     db: Annotated[AsyncSession, Depends(get_db)]
 ) -> UnitOfWork:

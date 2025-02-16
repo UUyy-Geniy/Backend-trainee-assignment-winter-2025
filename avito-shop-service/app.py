@@ -29,6 +29,6 @@ app.add_middleware(
 async def on_startup():
     await init_db()
 
-app.add_middleware(ErrorHandlingMiddleware)
+# app.add_middleware(ErrorHandlingMiddleware)
 
 app.include_router(api_router, prefix=settings.API_V1_STR)

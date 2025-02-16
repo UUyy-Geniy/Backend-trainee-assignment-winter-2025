@@ -13,3 +13,11 @@ python-jose==3.3.0
 passlib==1.7.2
 python-multipart==0.0.5
 bcrypt
+pytest==7.4.0
+pytest-asyncio==0.23.5
+pytest-asyncio
+anyio
+pytest-tornasync
+pytest-trio
+pytest-twisted
+twisted
